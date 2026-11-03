@@ -3,8 +3,8 @@
   "name": "replica-skill",
   "description": "The Replica skill pack for Claude",
   "owner": {
-    "name": "Jake Schincariol",
-    "url": "https://opusjake.ai"
+    "name": "Raúl (MonZe-Fit)",
+    "url": "https://github.com/MonZe-Fit"
   },
   "plugins": [
     {
@@ -12,7 +12,7 @@
       "description": "Twelve Claude skills that clone any app: recon, SEO and performance audit, architecture, design, build, backend, test, parity diff, a review-reading Entrepreneur skill, brand, launch and deploy.",
       "source": "./",
       "category": "productivity",
-      "homepage": "https://github.com/Jakeschincariol/replica-skill"
+      "homepage": "https://github.com/MonZe-Fit/replica-skill"
     }
   ]
 }

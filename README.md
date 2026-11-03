@@ -22,7 +22,7 @@ fine print is at the bottom, and the skills enforce it.
 Paste this into Claude:
 
 ```
-https://github.com/Jakeschincariol/replica-skill
+https://github.com/MonZe-Fit/replica-skill
 
 install skill
 ```
@@ -30,7 +30,7 @@ install skill
 Or as a plugin, in Claude Code:
 
 ```
-/plugin marketplace add Jakeschincariol/replica-skill
+/plugin marketplace add MonZe-Fit/replica-skill
 /plugin install replica-skill@replica-skill
 ```
 
@@ -39,7 +39,7 @@ Claude Code namespaces plugin skills, so installed as a plugin they show up as
 plain `/replica-recon`:
 
 ```bash
-git clone https://github.com/Jakeschincariol/replica-skill.git
+git clone https://github.com/MonZe-Fit/replica-skill.git
 cp -r replica-skill/replica-* ~/.claude/skills/
 ```
 
@@ -230,7 +230,11 @@ other's.
 
 ## Credit
 
-Made by Jake Schincariol, [opusjake.ai](https://opusjake.ai). Siblings:
+This fork is maintained by Raúl ([MonZe-Fit](https://github.com/MonZe-Fit)) and adds
+`/replica-seo` (SEO and Core Web Vitals audit, baseline and deploy gate).
+
+Original pack made by Jake Schincariol, [opusjake.ai](https://opusjake.ai)
+([upstream repo](https://github.com/Jakeschincariol/replica-skill)). Siblings:
 [Arena](https://github.com/Jakeschincariol/arena-skill),
 [X](https://github.com/Jakeschincariol/x-agent-skill),
 [LinkedIn](https://github.com/Jakeschincariol/linkedin-agent-skill),
