@@ -1,6 +1,6 @@
 # The Replica skill
 
-Eleven Claude skills that clone any app. Free, MIT, no signup, no API key,
+Twelve Claude skills that clone any app. Free, MIT, no signup, no API key,
 nothing to connect.
 
 One reverse-engineers the app you want to clone. One rebuilds it. One tests it
@@ -8,7 +8,8 @@ for bugs. And one is the Entrepreneur: it reads what the app's users hate and
 fixes it in yours, so you have an app you can sell.
 
 In between, the others plan the stack and the database, rebuild the design
-system, wire up auth and payments, score your clone against the original, give
+system, wire up auth and payments, score your clone against the original, audit SEO and
+speed so it ranks and loads better than the original, give
 it a name and a brand of its own, write the landing page and the store
 listing, and put it live on your domain.
 
@@ -49,11 +50,12 @@ method works.
 
 The tools need Python 3.8 or newer. Nothing to pip install.
 
-## The eleven
+## The twelve
 
 | command | what it does |
 | --- | --- |
 | `/replica-recon` | Reverse-engineers any app: screens, flows, components, data model. From public pages, screenshots, store listings and your own account. |
+| `/replica-seo` | SEO and performance audit: on-page, technical, structured data, local SEO and Core Web Vitals. A baseline on the original, a gate on your clone. |
 | `/replica-architect` | Plans the stack, database schema and API for your clone. |
 | `/replica-design` | Rebuilds the design system: colours, type, spacing, components. As tokens, with your own assets. |
 | `/replica-build` | Rebuilds the app screen by screen from the recon map. |
@@ -71,7 +73,7 @@ Run them in order. Each one reads what the last one wrote, in a `replica/`
 folder in your project.
 
 ```
-recon -> architect -> design -> build -> backend -> test -> diff -> entrepreneur -> brand -> launch -> deploy
+recon -> seo (baseline) -> architect -> design -> build -> backend -> test -> diff -> seo (gate) -> entrepreneur -> brand -> launch -> deploy
 ```
 
 An example: cloning a scheduling app, the kind where you share a link and
@@ -84,6 +86,10 @@ people book a time with you.
    reschedules...), the components, an inferred data model (users, event
    types, availability, bookings) and `features.csv`. The partner
    marketplace is marked out of scope: that is their network, not a feature.
+   Then **`/replica-seo`** saves the public pages and runs Lighthouse on
+   them: mobile performance 41, LCP 5.8 s, the booking page renders in
+   JavaScript with an empty server response, no structured data. That goes
+   into the plan: server-rendered pages, and speed as part of the angle.
 2. **`/replica-architect`** picks Next.js, Postgres, Stripe and Resend, writes
    the schema (with a constraint so two guests can never book the same slot)
    and orders the build: the booking flow end to end first.
@@ -99,6 +105,8 @@ people book a time with you.
    double submit), and logs bugs by severity until no S1 or S2 is open.
 7. **`/replica-diff`** scores it. Features 86, all must-haves done, booking
    page layout 91. Missing: round-robin for teams, the website embed.
+   **`/replica-seo`** runs again as a gate: SEO 92 against the original's
+   64, mobile performance 94 against 41, every Core Web Vital good.
 8. **`/replica-entrepreneur`** reads 140 real reviews across the App Store,
    G2, Capterra and Reddit. Top complaints: per-seat price jumps, no text
    reminders, guests confused by time zones. Each with counts and linked
@@ -118,7 +126,7 @@ are only thinking about cloning is a good way to find out if you should.
 
 ## The tools
 
-Six of them, all standard-library Python. None touch the network.
+Eight of them, all standard-library Python. None touch the network.
 
 ```bash
 python3 replica-diff/imgdiff.py original.png clone.png --out diff.png   # layout diff, ignores colour
@@ -127,6 +135,8 @@ python3 replica-entrepreneur/reviews.py replica/reviews.csv             # what u
 python3 replica-design/contrast.py replica/design/tokens.json           # WCAG contrast on your tokens
 python3 replica-brand/sweep.py . --avoid "Original App"                 # anything of the original left?
 python3 replica-launch/listing.py replica/launch/listing.json           # store limits + copycat checks
+python3 replica-seo/seo.py out/ --site out/ --baseline replica/seo/original/  # SEO audit vs original
+python3 replica-seo/perf.py lh/clone-*.json --baseline lh/original-*.json --gate  # Core Web Vitals budget
 ```
 
 **`imgdiff.py`** reads PNGs with no libraries, turns both screenshots into
@@ -144,6 +154,18 @@ reviews or one source are marked thin.
 **`sweep.py`** finds the original's name, domain and colours anywhere in your
 code, including inside identifiers like `OriginalAppEmbed`, and blocks the
 deploy until it is clean.
+
+**`seo.py`** audits saved HTML: indexing (noindex, canonical, robots.txt,
+sitemap), titles and descriptions, headings, thin content, image alt and
+size, render-blocking scripts, Open Graph, JSON-LD and, with `--local`,
+LocalBusiness name, address and phone. Ranked S1 to S3, scored 0 to 100,
+and with `--baseline` it lists what you fixed and what you regressed
+against the original.
+
+**`perf.py`** reads Lighthouse or PageSpeed Insights JSON and rates LCP,
+CLS, INP, TBT, FCP and Speed Index against Google's thresholds, checks a
+page weight budget, lists the biggest fixes, and puts clone and original
+side by side. Field data wins over lab data when both exist.
 
 **`listing.py`** checks App Store and Google Play limits, ranking claims in
 the title, wasted keyword characters, and the original's name anywhere in
@@ -199,6 +221,7 @@ replica-entrepreneur/  SKILL.md, reviews.py, themes.json
 replica-brand/         SKILL.md, sweep.py
 replica-launch/        SKILL.md, listing.py, listing.example.json
 replica-deploy/        SKILL.md, preflight.md
+replica-seo/           SKILL.md, seo.py, perf.py
 tests/                 the tests for every tool
 ```
 

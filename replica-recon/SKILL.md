@@ -129,6 +129,7 @@ few weeks), L (a quarter), XL (rescope it). No promises of a perfect clone.
 
 ## Output
 
-`replica/recon.md` and `replica/features.csv`, then a five-line summary: the
+`replica/recon.md` and `replica/features.csv` (then `/replica-seo` for the
+SEO and speed baseline), then a five-line summary: the
 core loop, screen and flow counts, the three hardest parts, what is out of
 scope, and the next step: `/replica-architect`.

@@ -7,9 +7,9 @@ from _load import ROOT
 
 SKILLS = ["replica-recon", "replica-architect", "replica-design", "replica-build",
           "replica-backend", "replica-test", "replica-diff", "replica-entrepreneur",
-          "replica-brand", "replica-launch", "replica-deploy"]
-ABOUT = ("Eleven free Claude skills that clone any app: reverse-engineer it, rebuild it, "
-         "test it for bugs, then fix what its users hate. Free, MIT.")
+          "replica-brand", "replica-launch", "replica-deploy", "replica-seo"]
+ABOUT = ("Twelve free Claude skills that clone any app: reverse-engineer it, rebuild it, "
+         "test it for bugs, beat it on SEO and speed, then fix what its users hate. Free, MIT.")
 
 
 def frontmatter(path):
@@ -20,7 +20,7 @@ def frontmatter(path):
 
 
 class Repo(unittest.TestCase):
-    def test_eleven_skill_folders_at_the_root(self):
+    def test_twelve_skill_folders_at_the_root(self):
         found = sorted(d for d in os.listdir(ROOT)
                        if os.path.isfile(os.path.join(ROOT, d, "SKILL.md")))
         self.assertEqual(found, sorted(SKILLS))
@@ -49,7 +49,7 @@ class Repo(unittest.TestCase):
             readme = " ".join(fh.read().split())
         self.assertTrue(readme.startswith("# The Replica skill"))
         for line in (
-            "Eleven Claude skills that clone any app. Free, MIT, no signup, no API key, "
+            "Twelve Claude skills that clone any app. Free, MIT, no signup, no API key, "
             "nothing to connect.",
             "One reverse-engineers the app you want to clone. One rebuilds it. One tests it "
             "for bugs. And one is the Entrepreneur: it reads what the app's users hate and "

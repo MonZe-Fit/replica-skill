@@ -89,5 +89,5 @@ Give honest numbers. A clone at 62% is at 62%.
 ## Output
 
 `replica/parity.md`, the diff images, and the top five things to build next.
-Then `/replica-build` for the gaps, or `/replica-entrepreneur` if parity is
-there.
+Then `/replica-build` for the gaps, or `/replica-seo` (gate mode) and
+`/replica-entrepreneur` if parity is there.

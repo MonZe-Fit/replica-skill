@@ -8,6 +8,8 @@ Date: {{YYYY-MM-DD}}  Commit: {{sha}}  Go from user: {{yes / not yet}}
 - [ ] no open S1 or S2 bugs
 - [ ] parity: all must-haves done ({{n/n}}), feature score {{n}}
 - [ ] rebrand sweep clean (`sweep.py` exit 0)
+- [ ] SEO gate: `seo.py --fail-under 85` exit 0, no S1, nothing regressed vs original
+- [ ] performance gate (mobile): `perf.py --gate` exit 0, no Core Web Vital poor
 - [ ] store listing passes (`listing.py` exit 0), if shipping to stores
 - [ ] production build passes
 - [ ] privacy policy and terms live, every processor listed

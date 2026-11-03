@@ -2,7 +2,8 @@
 name: replica-deploy
 description: >-
   Ships an app clone live on the user's own domain: a preflight gate (tests
-  green, parity must-haves done, rebrand sweep clean, listing linted, legal
+  green, parity must-haves done, rebrand sweep clean, SEO and speed gates
+  passed, listing linted, legal
   pages up), production database and env vars, the host, DNS records for the
   domain and for email, Stripe live mode, OAuth redirects, monitoring, and
   mobile builds to TestFlight and Play. Use when the user says "deploy it",
@@ -33,6 +34,8 @@ npx playwright test                                                  # replica-t
 python3 ../replica-diff/parity.py replica/features.csv               # must-haves done
 python3 ../replica-brand/sweep.py . --config replica/brand.json      # exit 0: clean
 python3 ../replica-launch/listing.py replica/launch/listing.json     # if shipping to stores
+python3 ../replica-seo/seo.py out/ --site out/ --baseline replica/seo/original/ --fail-under 85  # SEO gate
+python3 ../replica-seo/perf.py replica/seo/lh/clone-*.json --gate    # Core Web Vitals (mobile)
 npm run build                                                        # production build passes
 ```
 
