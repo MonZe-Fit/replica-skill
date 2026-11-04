@@ -289,7 +289,7 @@ def audit_page(html, name="page", local=False):
     if len(legacy) > 2 and not any(re.search(r"\.(webp|avif)", i.get("src", "") + i.get("srcset", ""), re.I)
                                    for i in p.images):
         out.append(issue("S3", "img-format", "%d images in PNG/JPG/GIF and none in WebP/AVIF." % len(legacy),
-                         "Serve WebP or AVIF; usually 25-50%% lighter."))
+                         "Serve WebP or AVIF; usually 25-50% lighter."))
 
     # performance hints in markup --------------------------------------
     blocking = [s for s in p.head_scripts if "async" not in s and "defer" not in s
